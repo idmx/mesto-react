@@ -19,7 +19,7 @@ export default function Main( props ) {
     .catch(err => {
       console.log(`Ошибка загрузки данных: ${err}`)
     })
-  })
+  }, [])
   
   return(
     <main className="content">
@@ -52,6 +52,7 @@ export default function Main( props ) {
             return (
               <Card
                 card={ card }
+                key={ card._id }
                 onCardClick={ props.onCardClick }
               />
             );
