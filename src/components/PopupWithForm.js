@@ -11,7 +11,8 @@ export default function PopupWithForm( props ) {
         <form
           className="popup__form"
           name={ `${ props.name }-profile` }
-          novalidate
+          onSubmit={ props.onSubmit }
+          noValidate
         >
           { props.children }
           <button

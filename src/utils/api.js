@@ -19,7 +19,7 @@ class Api {
       })
   }
 
-  setUserName( name, about ) {
+  setUserInfo( name, about ) {
     return fetch( `${ this.options.baseUrl }/users/me`, {
       method: 'PATCH',
       headers: this.options.headers,
