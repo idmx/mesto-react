@@ -5,19 +5,15 @@ export default function AddPlacePopup ( props ) {
   const [ title, setTitle ] = React.useState('');
   const [ link , setLink  ] = React.useState('');
 
+  React.useEffect( () => resetAddForm(), [ props.isOpen ])
+
   function onAddCard( evt ) {
     evt.preventDefault();
-    closePopup();
+    props.onClose();
     props.onAddPlace({
       name: title,
       link
     });
-    resetAddForm();
-  }
-
-  function closePopup() {
-    props.onClose();
-    resetAddForm();
   }
 
   function resetAddForm() {
@@ -31,7 +27,7 @@ export default function AddPlacePopup ( props ) {
       title="Новое место"
       button="Создать"
       isOpen={ props.isOpen }
-      onClose={ closePopup }
+      onClose={ props.onClose }
       onSubmit={ onAddCard }
     >
       <input type="text" id="title-input" className="popup__form-element" name="title-element"

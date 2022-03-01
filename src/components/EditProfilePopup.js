@@ -7,11 +7,9 @@ export default function EditProfilePopup( props ) {
   const [ name, setName ] = React.useState( currentUser.name );
   const [ description , setDescription  ] = React.useState( currentUser.about );
 
-  //На случай, если currentUser не успеет подгрузится сразу и поля заполнятся пустыми значениями
   React.useEffect( () => {
-    setName( currentUser.name )
-    setDescription( currentUser.about )
-  }, [ currentUser.name, currentUser.about ])
+    resetEditForm();
+  }, [ currentUser, props.isOpen ]);
 
   function handleSubmit( evt ) {
     evt.preventDefault();
@@ -20,11 +18,6 @@ export default function EditProfilePopup( props ) {
       name,
       about: description,
     });
-  }
-
-  function handleClose() {
-    props.onClose();
-    resetEditForm();
   }
 
   function resetEditForm() {
@@ -38,14 +31,14 @@ export default function EditProfilePopup( props ) {
       title="Редактировать профиль"
       button="Сохранить"
       isOpen={ props.isOpen }
-      onClose={ handleClose }
+      onClose={ props.onClose }
       onSubmit={ handleSubmit }
     >
       <input type="text" id="name-input" className="popup__form-element" name="name-profile"
-      value={ name } onChange={ e => setName( e.target.value ) } placeholder="Ваше имя" required minLength="2" maxLength="40" />
+      value={ name || "" } onChange={ e => setName( e.target.value ) } placeholder="Ваше имя" required minLength="2" maxLength="40" />
       <span className="popup__error name-input-error"></span>
       <input type="text" id="about-input" className="popup__form-element" name="about-profile" 
-      value={ description } onChange={ e => setDescription( e.target.value ) } placeholder="О себе" required minLength="2" maxLength="200" />
+      value={ description || "" } onChange={ e => setDescription( e.target.value ) } placeholder="О себе" required minLength="2" maxLength="200" />
       <span className="popup__error popup__error_visible about-input-error"></span>
     </PopupWithForm>
   )

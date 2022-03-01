@@ -3,7 +3,6 @@ import React from 'react';
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
-import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
 import ImagePopup from './ImagePopup';
@@ -19,11 +18,11 @@ function App() {
   const [ isAddPlacePopupOpen, setIsAddPlacePopupOpen ] = React.useState( false );
   const [ isEditAvatarPopupOpen, setIsEditAvatarPopupOpen ] = React.useState( false );
   const [ isRemovePopupOpen, setIsRemovePopupOpen ] = React.useState( false );
-  const [ selectedCard, setSelectedCard ] = React.useState([]);
+  const [ selectedCard, setSelectedCard ] = React.useState({});
   const [ isSelectedCard, setIsSelectedCard ] = React.useState( false );
   const [ currentUser, setCurrentUser ] = React.useState( user );
   const [ cardList, setCardList ] = React.useState([]);
-  const [ removedCard, setRemovedCard ] = React.useState([]);
+  const [ removedCard, setRemovedCard ] = React.useState({});
 
   React.useEffect( () => {
     api.getData()

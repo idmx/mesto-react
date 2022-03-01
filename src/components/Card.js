@@ -1,4 +1,11 @@
+import React from "react";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
 export default function Card( props ) {
+  const currentUser = React.useContext( CurrentUserContext )
+  const isOwn = props.card.owner._id === currentUser._id;
+  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+
   function handleClick() {
     props.onCardClick( props.card );
   }
@@ -20,7 +27,7 @@ export default function Card( props ) {
         onClick={ handleClick }
       />
       <button
-        className={ `element__trash ${ props.isOwn ? 'element__trach_active' : '' }` }
+        className={ `element__trash ${ isOwn ? 'element__trach_active' : '' }` }
         type="button"
         onClick={ handleDeleteCard }
       />
@@ -33,7 +40,7 @@ export default function Card( props ) {
         </h2>
         <div className="element__likes">
           <button
-            className={ `element__like ${ props.isLiked ? 'element__like_active' : '' }` }
+            className={ `element__like ${ isLiked ? 'element__like_active' : '' }` }
             type="button"
             onClick={ handleLikeClick }
           />
